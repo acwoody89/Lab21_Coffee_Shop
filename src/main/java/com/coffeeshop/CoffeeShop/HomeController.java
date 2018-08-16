@@ -10,7 +10,7 @@ public class HomeController {
 
 	@RequestMapping("/") // mapping to our index page
 	public ModelAndView indexPage() {
-		return new ModelAndView("index", "page", "HELLO WORLD!");
+		return new ModelAndView("index", "page", "Hectic Eclectic Coffee");
 	}
 
 	@RequestMapping("/register") // localhost:8080/teststuff
