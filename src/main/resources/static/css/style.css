@@ -10,3 +10,6 @@ h1 {
 	width: 200px;
 	height:auto;
 }
+body {
+   background-image: url("resources/static/images/coffee.jpg");
+}
