@@ -30,6 +30,23 @@
 		</div>
 		<input type="submit" name="Submit"> <br>
 	</form>
+	
+	
+	<table border = "1">
+		<c:forEach var="cust" items="${regist}">
+			<tr>
+			<!-- left out title on purpose -->
+				<td>${cust.firstName}</td>
+				<td>${cust.lastName}</td>
+				<td>${cust.email}</td>
+				<td>${cust.phoneNum}</td>
+				<td>${cust.password}</td>
+				<!-- this is url encoding and allows us to pass some data into the link for our controller method  -->
+				<td><a href="update?id=${cust.email}">Update</a></td>
+				<td><a href="delete?id=${cust.email}">Delete</a></td>
+			</tr>
+		</c:forEach>
+	</table>
 
 
 	<script src="js/script.js"></script>

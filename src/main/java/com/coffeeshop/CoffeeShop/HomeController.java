@@ -1,5 +1,8 @@
 package com.coffeeshop.CoffeeShop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.coffeeshop.CoffeeShop.dao.ItemsDao;
-import com.coffeeshop.CoffeeShop.dao.UsersDao;
+import com.coffeeshop.CoffeeShop.entity.Items;
+
 
 @Controller
 public class HomeController {
@@ -20,9 +24,14 @@ public class HomeController {
 		return new ModelAndView("index", "items", dao.findAll());
 	}
 
+//	@RequestMapping("/register") // localhost:8080/teststuff
+//	public String testPage() {
+//		return "register"; // string methods in the controller class return the view
+//	}
+	
 	@RequestMapping("/register") // localhost:8080/teststuff
-	public String testPage() {
-		return "register"; // string methods in the controller class return the view
+	public ModelAndView registerPage() {
+		return new ModelAndView("register", "regist", dao.findUser()); // string methods in the controller class return the view
 	}
 
 //	@RequestMapping("username")
@@ -36,6 +45,14 @@ public class HomeController {
 ////			+ pName + " " + passName);
 //	}
 	
+	@RequestMapping("/search")
+	public ModelAndView search(@RequestParam("personid") String name) {
+		List<Items> list = new ArrayList<>();
+		list = dao.findById(name);
+		System.out.println(list);
+		return new ModelAndView("search","person", list);
+	}
+	
 	@RequestMapping("username")
 	public ModelAndView addNew(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
 			@RequestParam("email") String email, @RequestParam("phone") String phone,
@@ -44,6 +61,14 @@ public class HomeController {
 		dao.insertUser(firstName, lastName, email, phone, password);
 		
 		return new ModelAndView("index", "items", dao.findAll());
+	}
+	
+	
+	@RequestMapping("/delete")
+	public ModelAndView delete(@RequestParam("email") String email) {
+
+		dao.deleteCustomer(email);
+		return new ModelAndView("index", "regist", dao.findUser());
 	}
 
 //	@RequestMapping("username")

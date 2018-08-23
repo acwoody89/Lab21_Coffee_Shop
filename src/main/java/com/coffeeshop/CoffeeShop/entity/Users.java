@@ -7,6 +7,14 @@ public class Users {
 	private String phoneNum;
 	private String password;
 	
+	public Users() {
+		firstName = "";
+		lastName = "";
+		email = "";
+		phoneNum = "";
+		password = "";
+	}
+	
 	public Users(String firstName, String lastName, String email, String phoneNum, String password) {
 		super();
 		this.firstName = firstName;
